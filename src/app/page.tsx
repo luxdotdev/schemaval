@@ -100,8 +100,6 @@ export default function Home() {
   async function handleFormSubmit(data: z.infer<typeof formSchema>) {
     const fileText: string = await data.file.text();
 
-    console.log(fileText);
-
     await invoke("validate", {
       file: fileText,
       source: data.source,
