@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
+import { invoke } from "@/lib/invoke";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -57,6 +58,12 @@ export default function Home() {
       description: "We are processing your data. Please wait.",
       duration: 5000,
     });
+
+    handleFormSubmit({
+      file,
+      source: form.getValues("source"),
+      compatibility: form.getValues("compatibility"),
+    });
   }
 
   function handleDrag(e: React.DragEvent) {
@@ -88,6 +95,18 @@ export default function Home() {
       // at least one file has been selected so do something
       handleFile(e.target.files[0]);
     }
+  }
+
+  async function handleFormSubmit(data: z.infer<typeof formSchema>) {
+    const fileText: string = await data.file.text();
+
+    console.log(fileText);
+
+    await invoke("validate", {
+      file: fileText,
+      source: data.source,
+      compatibility: data.compatibility,
+    });
   }
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -155,6 +174,7 @@ export default function Home() {
               <FormField
                 control={form.control}
                 name="source"
+                defaultValue="ScrimTime"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center space-x-2">
@@ -166,7 +186,7 @@ export default function Home() {
                       </Label>
                       <Select
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        defaultValue={"ScrimTime"}
                       >
                         <SelectTrigger className="w-[240px] pl-3 text-left font-normal">
                           <SelectValue placeholder="Select a source..." />
@@ -182,10 +202,11 @@ export default function Home() {
               <FormField
                 control={form.control}
                 name="compatibility"
+                defaultValue="Parsertime"
                 render={() => (
                   <FormItem>
                     <div className="flex items-center space-x-2">
-                      <Checkbox id="compatibility" />
+                      <Checkbox id="compatibility" checked disabled />
                       <Label
                         htmlFor="compatibility"
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
