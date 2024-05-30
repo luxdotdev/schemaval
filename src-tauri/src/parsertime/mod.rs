@@ -39,20 +39,20 @@ impl Schemas {
             dva_remech: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,dva_remech,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,\d+$").unwrap(),
             echo_duplicate_start: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,echo_duplicate_start,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,\d+$").unwrap(),
             echo_duplicate_end: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,echo_duplicate_end,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,\d+$").unwrap(),
-            hero_spawn: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,hero_spawn,\d+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,(0|[\p{L}\p{N}\.\s]+),\d+$").unwrap(),
-            hero_swap: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,hero_swap,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,\d{1,5}\.\d{2}$").unwrap(),
-            kill: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,kill,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,(0|[\p{L}\p{N}\.\s]+),\d{1,5}\.\d{2},(True|0),\d+$").unwrap(),
+            hero_spawn: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,hero_spawn,(0|\d{1,5}\.\d{2}),[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,(|[\p{L}\p{N}\.\s]+),\d+$").unwrap(),
+            hero_swap: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,hero_swap,(0|\d{1,5}\.\d{2}),[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,(0|\d{1,5}\.\d{2})$").unwrap(),
+            kill: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,kill,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,(0|[\p{L}\p{N}\.\s]+),(\d{1,5}|\d{1,5}\.\d{2}),(True|0),(True|0)$").unwrap(),
             match_end: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,match_end,\d{1,5}\.\d{2},\d+,\d+,\d+$").unwrap(),
             match_start: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,match_start,\d+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+$").unwrap(),
             mercy_rez: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,mercy_rez,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+$").unwrap(),
-            objective_captured: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,objective_captured,\d{1,5}\.\d{2},\d+,[\p{L}\p{N}\s]+,\d+,\d{1,5}\.\d{2},\d+,\d+$").unwrap(),
-            objective_updated: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,objective_updated,\d+,\d+,\d+,\d+$").unwrap(),
+            objective_captured: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,objective_captured,\d{1,5}\.\d{2},\d+,[\p{L}\p{N}\s]+,\d+,(0|\d{1,5}\.\d{2}),(0|\d{1,5}\.\d{2}),(\d+|\d{1,5}\.\d{2})$").unwrap(),
+            objective_updated: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,objective_updated,(\d{1,5}|\d{1,5}\.\d{2}),\d+,\d+,\d+$").unwrap(),
             offensive_assist: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,offensive_assist,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,(0|[\p{L}\p{N}\.\s]+)$").unwrap(),
             payload_progress: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,payload_progress,\d{1,5}\.\d{2},\d+,[\p{L}\p{N}\s]+,\d+,\d{1,5}\.\d{2}$").unwrap(),
-            player_stat: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,player_stat,\d{1,5}\.\d{2},\d+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,\d+,\d+,\d+,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+(\.\d{2})?,\d+(\.\d{2})?,\d+(\.\d{2})?,\d+,\d+,\d+,\d+,\d+,\d{1,2}(\.\d{2})?,\d{1,7}\.\d{2},\d{1,7}\.\d{2}$").unwrap(),
+            player_stat: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,player_stat,\d{1,5}\.\d{2},\d+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,\d+,\d+,\d+,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d{1,7}(\.\d{2})?,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+,\d+(\.\d{2})?,\d+(\.\d{2})?,\d+(\.\d{2})?,\d+,\d+,\d+,\d+,\d+,\d{1,2}(\.\d{2})?,(0|\d{1,7}\.\d{2}),(0|\d{1,7}\.\d{2})$").unwrap(),
             point_progress: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,point_progress,\d{1,5}\.\d{2},\d+,[\p{L}\p{N}\s]+,\d+,\d{1,5}\.\d{2}$").unwrap(),
-            remech_charged: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,remech_charged,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,(0|[\p{L}\p{N}\.\s]+),\d+$").unwrap(),
-            round_end: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,round_end,\d{1,5}\.\d{2},\d+,[\p{L}\p{N}\s]+,\d+,\d+,\d+,(0|\d{1,5}\.\d{2}),(0|\d{1,5}\.\d{2}),\d{1,5}\.\d{2}$").unwrap(),
+            remech_charged: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,remech_charged,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,(0|[\p{L}\p{N}\.\s]+),(\d{1,5}|\d{1,5}\.\d{2})$").unwrap(),
+            round_end: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,round_end,\d{1,5}\.\d{2},\d+,[\p{L}\p{N}\s]+,\d+,\d+,\d+,(\d{1,5}|\d{1,5}\.\d{2}),(\d{1,5}|\d{1,5}\.\d{2}),(\d{1,5}|\d{1,5}\.\d{2})$").unwrap(),
             round_start: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,round_start,(0|\d{1,5}\.\d{2}),\d+,[\p{L}\p{N}\s]+,\d+,\d+,\d+").unwrap(),
             setup_complete: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,setup_complete,(0|\d{1,5}\.\d{2}),\d+,(0|\d{1,5}\.\d{2})$").unwrap(),
             ultimate_charged: Regex::new(r"^\[\d{2}:\d{2}:\d{2}\] ,ultimate_charged,\d{1,5}\.\d{2},[\p{L}\p{N}\s]+,[\p{L}\p{N}\.\s]+,[\p{L}\p{N}\.\s]+,(0|[\p{L}\p{N}\.\s]+),\d+$").unwrap(),
@@ -62,7 +62,7 @@ impl Schemas {
     }
 }
 
-pub fn validate(request: Request) -> Result<(), String> {
+pub fn validate(request: Request) -> Result<String, String> {
     let file_text = request.file;
 
     let schemas = Schemas::new();
@@ -78,7 +78,7 @@ pub fn validate(request: Request) -> Result<(), String> {
         }
     }
 
-    Ok(())
+    Ok("Validation successful".to_string())
 }
 
 fn validate_line(line: &str, schemas: &Schemas) -> Result<(), String> {
