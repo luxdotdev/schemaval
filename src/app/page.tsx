@@ -56,7 +56,7 @@ export default function Home() {
     toast({
       title: "Creating map...",
       description: "We are processing your data. Please wait.",
-      duration: 5000,
+      duration: 1000,
     });
 
     handleFormSubmit({
@@ -100,10 +100,16 @@ export default function Home() {
   async function handleFormSubmit(data: z.infer<typeof formSchema>) {
     const fileText: string = await data.file.text();
 
-    await invoke("validate", {
+    const res = await invoke("validate", {
       file: fileText,
       source: data.source,
       compatibility: data.compatibility,
+    });
+
+    toast({
+      title: "Validation complete",
+      description: res,
+      duration: 5000,
     });
   }
 
