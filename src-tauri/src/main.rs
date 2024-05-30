@@ -20,7 +20,7 @@ fn validate(file: String, source: String, compatibility: String) -> String {
 
     let result = parsertime::validate(request);
     match result {
-        Ok(_) => "Success".to_string(),
+        Ok(_) => "Validation successful".to_string(),
         Err(e) => e,
     }
 }
