@@ -7,7 +7,7 @@
     "distDir": "../out"
   },
   "package": {
-    "productName": "schemaval",
+    "productName": "Log Schema Validator",
     "version": "0.1.0"
   },
   "tauri": {
@@ -58,7 +58,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "schemaval",
+        "title": "Log Schema Validator",
         "width": 800,
         "fileDropEnabled": false
       }
