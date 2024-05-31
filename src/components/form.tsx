@@ -97,16 +97,19 @@ export function InputForm() {
   async function handleFormSubmit(data: z.infer<typeof formSchema>) {
     const fileText: string = await data.file.text();
 
-    const res = await invoke("validate", {
+    const res = await invoke<string>("validate", {
       file: fileText,
       source: data.source,
       compatibility: data.compatibility,
     });
 
+    const success = res.includes("Valid");
+
     toast({
-      title: "Validation complete",
+      title: `${success ? "✅ Validation Successful" : "❌ Validation Failed"}`,
       description: res,
       duration: 5000,
+      variant: `${!success ? "destructive" : "default"}`,
     });
   }
 
